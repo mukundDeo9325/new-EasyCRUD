@@ -1,18 +1,38 @@
 version: "3.8"
 
 services:
+
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    container_name: backend
     ports:
       - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - easycrud-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    container_name: frontend
     ports:
       - "3000:3000"
+    restart: unless-stopped
+    networks:
+      - easycrud-network
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+
+networks:
+  easycrud-network:
+    driver: bridge
