@@ -74,6 +74,10 @@ apt install docker-compose -y
 docker-compose --version
 ```
 ## docker compose file 
+- create docker network
+```bash
+docker network create easycrud-network
+```
 - Create and start containers in detach way 
 ```
 docker-compose up -d
