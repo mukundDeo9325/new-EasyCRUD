@@ -1,3 +1,7 @@
+# If you got an error like container is terminating it probably an Error of Network so create docker network 
+```bash
+docker network create easycrud-network
+```
 # MariaDB Setup and Configuration Guide for Windows
 
 This guide explains how to set up MariaDB, create a database, and Create Database User
